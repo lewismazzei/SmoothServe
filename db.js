@@ -72,7 +72,7 @@ function drawCard(items, table, orderId) {
 	var totalSeconds = 0;
 	document.getElementById("ordersDiv").appendChild(card);
 	cardHeader.textContent = "Table " + table;
-	 timer = setInterval ( function(){
+	timer = setInterval ( function(){
 		++totalSeconds;
 		var hours = Math.floor(totalSeconds / 3600);
 		var minutes = Math.floor((totalSeconds - hours * 3600) / 60);
@@ -87,6 +87,15 @@ function updateStatusToServed(orderId) {
 	 firebase.database().ref('orders/' + orderId).set({
 	 	state: 1
 	 });
+	 var servedCard = document.getElementById(orderId);
+	 servedCard.remove();
+	 return servedCard;
+}
+
+function updateStatusToPayed(orderId) {
+	 firebase.database().ref('orders/' + orderId).set({
+	 	state: 2
+	 });
 	 document.getElementById(orderId).remove();
 }
 
@@ -94,3 +103,26 @@ function updateCard() {
 
 }
 
+//VIEW TRANSITION SCRIPTS
+
+    function waitingButtonClicked() {
+      document.getElementById("startView").style.display = 'none';
+      document.getElementById("waitingView").style.display = 'block';
+      //initialView.style.display = "none";
+      //indexView.style.display = "block";
+    }
+    function barButtonClicked() {
+      document.getElementById("startView").style.display = 'none';
+      document.getElementById("barView").style.display = 'block';
+      //initialView.style.display = "none";
+      //indexView.style.display = "block";
+    }
+    function kitchenButtonClicked() {
+      document.getElementById("startView").style.display = 'none';
+      document.getElementById("kitchenView").style.display = 'block';
+      //initialView.style.display = "none";
+      //indexView.style.display = "block";
+    }
+    document.getElementById("waitingButton").addEventListener("click", waitingButtonClicked);
+    document.getElementById("barButton").addEventListener("click", barButtonClicked);
+    document.getElementById("kitchenButton").addEventListener("click", kitchenButtonClicked);
