@@ -42,8 +42,6 @@ starCountRef.on('value', function(snapshot) {
 */
 
 
-
-
 function drawCard(items, table, orderId) {
 	var card = document.createElement('div');
 	card.id = "order-" + orderId;
@@ -61,11 +59,12 @@ function drawCard(items, table, orderId) {
 				listIcon.className += "icon";
 			}
 		var cardExtraContent = card.appendChild(document.createElement('div'));
+		cardExtraContent.innerHTML = '<a class="left floated" onclick="updateStatusToServed(this.parentNode.parentNode.id);"><i class="send icon"></i>Done</a><a class="right floated" onclick="modifyOrder(this.parentNode.parentNode.id);"><i class="edit icon"></i>Modify</a>';
 
 	cardContent.className += "content";
 	cardHeader.className +=  "header";
 	cardTime.className += "meta";
-	cardTime.id += "timer" + table;
+	cardTime.id += "timer" + orderId;
 	cardDescription.className += "description";
 	cardList.className += "ui list";
 	cardExtraContent.className += "extra content";
@@ -73,13 +72,22 @@ function drawCard(items, table, orderId) {
 	var totalSeconds = 0;
 	document.getElementById("ordersDiv").appendChild(card);
 	cardHeader.textContent = "Table " + table;
-	var timer = setInterval ( function(){
+	 timer = setInterval ( function(){
 		++totalSeconds;
 		var hours = Math.floor(totalSeconds / 3600);
 		var minutes = Math.floor((totalSeconds - hours * 3600) / 60);
 		var seconds = totalSeconds - (hours * 3600 + minutes * 60);
-	document.getElementById("timer" + table).innerHTML = minutes + "min " + seconds + "sec";
+	document.getElementById("timer" + orderId).innerHTML = minutes + "min " + seconds + "sec";
 	}, 1000);
+
+}
+
+function updateStatusToServed(orderId) {
+	 clearInterval(timer);
+	 firebase.database().ref('orders/' + orderId).set({
+	 	state: 1
+	 });
+	 document.getElementById(orderId).remove();
 }
 
 function updateCard() {
