@@ -8,35 +8,38 @@
 
   <link rel="stylesheet" type="text/css" href="semantic/semantic.min.css">
   <title>SmoothServe</title>
+
 </head>
 
 <body>
   <div class="ui container">
 
-    <h1>SmoothServe</h1>
+      <h4 class="ui horizontal divider header"><i class="remove bookmark icon"></i>Tables</h4>
+      
+    <div class="ui container" id="tableNumbersDiv">
+      <button class="ui inverted green button" onclick="showAllTables();">All</button>
+      
+      <button class="ui button green">27</button>
+      <button class="ui button green">23</button>
+      <button class="ui button green">17</button>
+      <button class="ui button green">16</button>
+      <button class="ui button green">12</button>
+      <button class="ui button green">15</button>
+    
+      <button class="ui yellow button">28</button>
+      <button class="ui yellow button">2</button>
+    
+      <button class="ui red button">23</button>
+      <button class="ui red button">3</button>
+      <button class="ui red button">16</button>
 
-    <div class="" id="tableNumbersDiv">
-      <div class="orange ui buttons" id="waitingTablesNum">
-        <button class="ui button">15</button>
-        <button class="ui button">23</button>
-        <button class="ui button">1</button>
-      </div>
+      <button class="ui button">10</button>
+      <button class="ui button">11</button>
 
-      <div class="green ui buttons" id="eatingTablesNum">
-        <button class="ui button">45</button>
-        <button class="ui button">55</button>
-        <button class="ui button">76</button>
-      </div>
-
-      <div class="teal ui buttons" id="payingTablesNum">
-        <button class="ui button">128</button>
-        <button class="ui button">2</button>
-        <button class="ui button">88</button>
-      </div>
     </div>
 
-    <div class="ui divider"></div>
-    
+    <h4 class="ui horizontal divider header"><i class="sticky note outline icon"></i>Orders</h4>
+
     <div class="ordersDiv ui cards" id="ordersDiv">
 
       <div class="card red" id="order-2">
