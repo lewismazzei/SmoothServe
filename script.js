@@ -9,11 +9,11 @@ function addNewTable() {
 function addTable(num, state){
 
   var tableNum = document.createElement("button");
-  tableNum.classList.add("numero-mesa");
+  tableNum.classList.add("table-num");
   tableNum.classList.add("mesa"+tellState(state));
   tableNum.innerHTML=num;
 
-  var tableCategory = document.getElementById("mesas"+tellState(state));
+  var tableCategory = document.getElementById("tables"+tellState(state));
   tableCategory.appendChild(tableNum);
   console.log("Added table " + num + " as " + tellState(state));
 }
@@ -21,23 +21,23 @@ function addTable(num, state){
 function tellState(state){
   switch(state){
     case 0:
-    return "Decidiendo";
+    return "Deciding";
     break;
 
     case 1:
-    return "Esperando";
+    return "Waiting";
     break;
 
     case 2:
-    return "Comiendo";
+    return "Eating";
     break;
 
     case 3:
-    return "Pagando";
+    return "Paying";
     break;
 
     default:
-    return "Libre";
+    return "Free";
     break;
 
   }
