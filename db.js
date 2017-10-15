@@ -59,8 +59,7 @@ function drawCard(items, table, orderId) {
     listItem.className += "item";
     var listIcon = listItem.appendChild(document.createElement('i'));
     listIcon.className += "food icon";
-    var food_name = listItem.appendChild(document.createElement('p'));
-    food_name.innerHTML = value.name;
+    listItem.innerHTML += value.name;
   });
 
   /*for (itemCount = 0; itemCount < items.length; itemCount++) {
@@ -85,19 +84,29 @@ function drawCard(items, table, orderId) {
   cardHeader.textContent = "Table " + table;
 }
 
+
+setInterval( function(){
+  var orders = firebase.database().ref("orders/");
+  for (var key in orders) {
+    updateCardTimer(key);
+  }
+}, 1000);
+
 function updateCardTimer(orderId) {
-  setInterval( function(){
-    var timer = document.getElementById("timer"+orderId);
-    timer.textContent = Date.now() - data.val()
-  }, 1000)
+  var startTime = firebase.database().ref("orders/" + orderId + "/starTime");
+  console.log(startTime);
+  var timer = document.getElementById("timer"+orderId);
+  timer.textContent = (Date.now() - startTime.val());
 }
 
 function updateStatusToServed(orderId) {
-  delete timers["timer" + orderId.slice(6)];
-  firebase.database().ref('orders/' + orderId).set({
-    state: 1
-  });
-  document.getElementById(orderId).remove();
+  // firebase.database().ref('orders/' + orderId).set({
+  //   state: 1
+  // });
+  // document.getElementById(orderId).remove();
+  var data = firebase.database().ref("orders/"+orderId);
+  var card_order = document.getElementById(data.key);
+  document.getElementById("ordersDiv").removeChild(card_order);
 }
 
 function modifyOrder() {
