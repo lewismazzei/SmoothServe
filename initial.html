@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <link rel="stylesheet" type="text/css" href="semantic/semantic.min.css">
+  <title>SmoothServe</title>
+</head>
+<body>
+	<div id="initial" class="ui container">
+		<h1 style="text-align: left; padding-top: 1em">SmoothServe</h1>
+		<div class="ui vertically divided grid">
+			<div class="one column row">
+				<div class="column">
+				</div>
+			</div>
+			<div class="one column row">
+				<div id="waitingButton" class="column" align="center">
+					<button onclick="waitingButtonClicked" class="massive ui button">Waiting Staff</button>
+				</div>
+			</div>
+			<div class="one column row">
+				<div id="barButton" class="column" align="center">
+					<button onclick="barButtonClicked" class ="massive ui button">Bar Staff</button>
+				</div>
+			</div>
+			<div class="one column row">
+				<div id="kitchenButton"class="column" align="center">
+					<button onclick="" class="massive ui button">Kitchen Staff</button>
+				</div>
+			</div>
+			<div class="one column row">
+				<div class="column">
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+		function waitingButtonClicked() {
+			var initialView = document.getElementById("initial");
+			var indexView = document.getElementById("index");
+
+			initialView.style.display = "none";
+			indexView.style.display = "block";
+		}
+	</script>
+</body>
+</html>
