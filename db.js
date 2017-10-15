@@ -50,6 +50,26 @@ order_ref.on('child_removed', function(data) {
   
 });
 
+function addCustomOrder(){
+  addOrder("Alex", Math.floor(Math.random() * 35), [{
+    name: document.getElementById("new-order-1").value
+  }, {
+    name: document.getElementById("new-order-2").value
+  }, {
+    name: document.getElementById("new-order-3").value
+  }, {
+    name: document.getElementById("new-order-4").value
+  }, {
+    name: document.getElementById("new-order-5").value
+  }, ]);
+
+  document.getElementById("new-order-1").value = "";
+  document.getElementById("new-order-2").value = "";
+  document.getElementById("new-order-3").value = "";
+  document.getElementById("new-order-4").value = "";
+  document.getElementById("new-order-5").value = "";
+}
+
 function addOrder(waiter, table, items) {
   database.ref('/orders/').push({
     waiter: waiter,
