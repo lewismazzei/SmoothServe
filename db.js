@@ -153,12 +153,14 @@ function moveToEating(orderId, table) {
   if (document.contains(document.getElementById(id))) {
     document.getElementById(id).classList.remove("yellow");
     document.getElementById(id).classList.add("green");
+    document.getElementById(id).setAttribute("onclick", "updateStatusToPaying((this.id).slice(3));");      
+    
   } else{
   var Btns = document.getElementById("tableNumbersDiv");
   var newBtn = Btns.appendChild(document.createElement('button'));
   newBtn.classList.add("ui", "button", "green");
+  newBtn.setAttribute("onclick", "updateStatusToPaying((this.id).slice(3));");  
   newBtn.id = id;
-  newBtn.setAttribute("onclick", "updateStatusToPaying((this.id).slice(3));");
   newBtn.textContent = table;
   }
 }
@@ -173,11 +175,19 @@ function updateStatusToPaying(orderId) {
   });
 }
 
+function updateStatusToFinished(orderId) {  
+  order_ref.child(orderId).update({
+    state: 3
+  }).then(function(){
+    moveToFinished(orderId);
+  });
+}
+
 function moveToFinished(orderId) {
   var id = "btn"+orderId;
   if (document.contains(document.getElementById(id))) {
-    var Btn = document.getElementById(id);
-    document.getElementById("tableNumbersDiv").removeChild(Btn);
+    var btn = document.getElementById(id);
+    document.getElementById("tableNumbersDiv").removeChild(btn);
   }
 }
 
@@ -186,12 +196,13 @@ function moveToPaying(orderId, table) {
   if (document.contains(document.getElementById(id))) {
     document.getElementById(id).classList.remove("green");
     document.getElementById(id).classList.add("yellow");
+    document.getElementById(id).setAttribute("onclick", "updateStatusToFinished((this.id).slice(3));");      
   } else{
   var Btns = document.getElementById("tableNumbersDiv");
   var newBtn = Btns.appendChild(document.createElement('button'));
   newBtn.classList.add("ui", "button", "yellow");
+  newBtn.setAttribute("onclick", "updateStatusToFinished((this.id).slice(3));");    
   newBtn.id = id;
-  newBtn.setAttribute("onclick", "updateStatusToPaying((this.id).slice(3));");
   newBtn.textContent = table;
   }
 }
