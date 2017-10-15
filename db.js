@@ -104,7 +104,6 @@ function addCustomOrder(){
       }, {
         name: document.getElementById("new-order-3").value
       },]);
-      resetValues(val1, val2, val3, val4, val5);
     break;
 
     case 4:
@@ -117,7 +116,6 @@ function addCustomOrder(){
       }, {
         name: document.getElementById("new-order-4").value
       },]);
-      resetValues(val1, val2, val3, val4, val5);
     break;
 
     case 5:
@@ -132,7 +130,6 @@ function addCustomOrder(){
       }, {
         name: document.getElementById("new-order-5").value
       },]);
-      resetValues(val1, val2, val3, val4, val5);
     break;
 
     default:
