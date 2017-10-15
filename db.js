@@ -11,6 +11,23 @@ firebase.initializeApp(config);
 
 var database = firebase.database();
 
+var order_ref = database.ref("/orders/");
+
+order_ref.on('child_added', function(data) {
+  drawCard(data.val().items, data.val().table, data.key);
+});
+
+order_ref.on('child_changed', function(data) {
+  var card_order = document.getElementById(data.key);
+  document.getElementById("ordersDiv").removeChild(card_order);
+  drawCard(data.val().items, data.val().table, data.key);
+});
+
+order_ref.on('child_removed', function(data) {
+  var card_order = document.getElementById(data.key);
+  document.getElementById("ordersDiv").removeChild(card_order);
+});
+
 function addOrder(waiter, table, items) {
   database.ref('/orders/').push({
     waiter: waiter,
@@ -20,28 +37,6 @@ function addOrder(waiter, table, items) {
     startTime: Date.now()
   });
 }
-
-var order_ref = database.ref("/orders/");
-
-order_ref.on('child_added', function(data) {
-  var items_list = data.val().items;
-  drawCard(items_list, data.val().table, data.key);
-});
-
-order_ref.on('child_changed', function(data) {
-  var card_order = document.getElementById(data.key);
-  document.getElementById("ordersDiv").removeChild(card_order);
-  var items_list = data.val().items;
-  drawCard(items_list, data.val().table, data.key);
-});
-
-order_ref.on('child_removed', function(data) {
-  var card_order = document.getElementById(data.key);
-  document.getElementById("ordersDiv").removeChild(card_order);
-});
-
-
-
 
 function drawCard(items, table, orderId) {
   var card = document.createElement('div');
@@ -62,13 +57,6 @@ function drawCard(items, table, orderId) {
     listItem.innerHTML += value.name;
   });
 
-  /*for (itemCount = 0; itemCount < items.length; itemCount++) {
-    var listItem = cardList.appendChild(document.createElement('div'));
-    listItem.id = items[itemCount];
-    listItem.className += "item";
-    var listIcon = listItem.appendChild(document.createElement('i'));
-    listIcon.className += "icon";
-  }*/
   var cardExtraContent = card.appendChild(document.createElement('div'));
   cardExtraContent.innerHTML = '<a class="left floated" onclick="updateStatusToServed(this.parentNode.parentNode.id);"><i class="send icon"></i>Done</a><a class="right floated" onclick="modifyOrder(this.parentNode.parentNode.id);"><i class="edit icon"></i>Modify</a>';
 
@@ -84,19 +72,42 @@ function drawCard(items, table, orderId) {
   cardHeader.textContent = "Table " + table;
 }
 
-
 setInterval( function(){
-  var orders = firebase.database().ref("orders/");
-  for (var key in orders) {
-    updateCardTimer(key);
-  }
+  order_ref.once('value', function(data) {
+    data.forEach(function(childData) {
+      updateCardTimer(childData.val().startTime, childData.key);
+    });
+  });
 }, 1000);
 
-function updateCardTimer(orderId) {
-  var startTime = firebase.database().ref("orders/" + orderId + "/starTime");
-  console.log(startTime);
+function updateCardTimer(startTime, orderId) {
   var timer = document.getElementById("timer"+orderId);
-  timer.textContent = (Date.now() - startTime.val());
+  var s = Math.floor((Date.now() - startTime)/1000);
+  var m = Math.floor(s/60);
+  s -= 60*m;
+  timer.innerHTML = m + "min " + s + "sec";
+
+  var cardClasses = document.getElementById(orderId).classList;
+  cardClasses.remove("teal","green","olive","yellow","orange","red")
+  switch(m){
+    case 0:
+      cardClasses.add("teal");
+      break;
+    case 1:
+      cardClasses.add("green");
+      break;
+    case 2:
+      cardClasses.add("olive");
+      break;
+    case 3:
+      cardClasses.add("yellow");
+      break;
+    case 4:
+      cardClasses.add("orange");
+      break;
+    default:
+      cardClasses.add("red");
+  }
 }
 
 function updateStatusToServed(orderId) {
