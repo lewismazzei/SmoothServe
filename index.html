@@ -9,7 +9,7 @@
   <link rel="stylesheet" type="text/css" href="semantic/semantic.min.css">
   <title>SmoothServe</title>
   <style>
-    .buttonsDiv button{
+    .buttonsDiv button {
       margin-top: 0.5em !important;
     }
   </style>
@@ -19,20 +19,19 @@
   <div id="cardView" class="ui container" style="margin-top: 1em; text-align: center">
 
     <!-- <h4 class="ui horizontal divider header"><i class="remove bookmark icon"></i>Tables</h4> -->
-      
+
     <div class="ui container buttonsDiv" id="tableNumbersDiv">
       <button class="ui inverted green button" onclick="showAllTables();">All</button>
 
     </div>
 
-    <h4 class="ui horizontal divider header"><i class="sticky note outline icon"></i>Orders</h4>
-
-    <button id="newOrderButton" style="margin: 0em auto 1em auto !important" class="ui button" onclick="newOrderButtonClicked();"> New Order </button>
+    <h4 class="ui horizontal divider header">
+      <i class="sticky note outline icon"></i>Orders</h4>
 
     <div style="text-align: left;" class="ordersDiv ui cards" id="ordersDiv">
-      
+
     </div>
-      <!--<div class="card red" id="order-2">
+    <!--<div class="card red" id="order-2">
         <div class="content">
           <div class="header">Table 23</div>
           <div class="meta">10min 50s</div>
@@ -102,54 +101,42 @@
           </div>
         </div>
       -->
-    </div>
-    <div style="display: none; padding: 2em;" class="container" id="menuView">
-      <div class="ui grid">
-        <div class="four wide column"><button id="burger" class="massive ui button">
-          Burger
-        </button></div>
-        <div class="four wide column"><button id="pizza" class="massive ui button">
-          Pizza
-        </button></div>
-        <div class="four wide column"><button id="spaghetti" class="massive ui button">
-          Spaghetti
-        </button></div>
-        <div class="four wide column"><button id="dough-balls" class="massive ui button">
-          Dough Balls
-        </button>
+  </div>
+  <div style="margin-top: 1em;" class="ui container">
+      <div class=" ui card pink">
+        <div class="content">
+          <div class="header">Table X</div>
+          <div class="meta"></div>
+          <div class="description">
+            <div class="ui left icon input">
+              <input type="text" placeholder="Drink" id="new-order-1">
+              <i class="cocktail icon"></i>
+            </div>
+            <div class="ui left icon input">
+              <input type="text" placeholder="Drink" id="new-order-2">
+              <i class="cocktail icon"></i>
+            </div>
+            <div class="ui left icon input">
+              <input type="text" placeholder="Dish" id="new-order-3">
+              <i class="cocktail icon"></i>
+            </div>
+            <div class="ui left icon input">
+              <input type="text" placeholder="Dish" id="new-order-4">
+              <i class="cocktail icon"></i>
+            </div>
+            <div class="ui left icon input">
+              <input type="text" placeholder="Dessert" id="new-order-5">
+              <i class="cocktail icon"></i>
+            </div>
+          </div>
+        </div>
+        <div class="extra content">
+          <a class="left floated" onclick="">
+            <i class="edit icon"></i>Add Order</a>
+        </div>
       </div>
-      <div class="four wide column"><button id="onion-rings" class="massive ui button">
-        Onion Rings
-      </button></div>
-      <div class="four wide column"><button id="salad" class="massive ui button">
-        Salad
-      </button></div>
-      <div class="four wide column"><button id="mojito" class="massive ui button">
-        Mojito
-      </button></div>
-      <div class="four wide column"><button id="wine" class="massive ui button">
-        Wine
-      </button></div>
-      <div class="four wide column"><button id="beer" class="massive ui button">
-        Beer
-      </button></div>
-    </div>
 
-      
-      
-      
-      
-      
-      
-      
-      
-    </div>
-  <script>
-  function newOrderButtonClicked() {
-      document.getElementById("ordersDiv").style.display = "none";
-      document.getElementById("menuView").style.display = "block";
-    }
-  </script>
+  </div>
   <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
     crossorigin="anonymous"></script>
   <script src="semantic/semantic.min.js"></script>
