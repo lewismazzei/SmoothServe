@@ -8,15 +8,19 @@
 
   <link rel="stylesheet" type="text/css" href="semantic/semantic.min.css">
   <title>SmoothServe</title>
-
+  <style>
+    .buttonsDiv button{
+      margin-top: 0.5em !important;
+    }
+  </style>
 </head>
 
 <body>
-  <div class="ui container">
+  <div class="ui container" style="margin-top: 1em;">
 
-      <h4 class="ui horizontal divider header"><i class="remove bookmark icon"></i>Tables</h4>
+    <!-- <h4 class="ui horizontal divider header"><i class="remove bookmark icon"></i>Tables</h4> -->
       
-    <div class="ui container" id="tableNumbersDiv">
+    <div class="ui container buttonsDiv" id="tableNumbersDiv">
       <button class="ui inverted green button" onclick="showAllTables();">All</button>
       
       <button class="ui button green">27</button>
@@ -32,9 +36,6 @@
       <button class="ui red button">23</button>
       <button class="ui red button">3</button>
       <button class="ui red button">16</button>
-
-      <button class="ui button">10</button>
-      <button class="ui button">11</button>
 
     </div>
 
