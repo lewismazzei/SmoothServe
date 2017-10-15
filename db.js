@@ -19,6 +19,7 @@ function addOrder(waiter, table, items) {
     table: table,
     state: 0,
     items: items
+    start_time: new Date().getTime();
   });
 }
 
