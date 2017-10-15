@@ -35,6 +35,14 @@ order_ref.on('child_added', function(data) {
 order_ref.on('child_changed', function(data) {
   if(data.val().state === 0){
     drawCard(data.val().items, data.val().table, data.key);
+  } else if(data.val().state === 1){ //The table is eating
+      moveToEating(data.key, data.val().table);
+      updateStatusToServed(data.key);
+  } else if(data.val().state === 2){
+     moveToPaying(data.key, data.val().table);
+     updateStatusToPaying(data.key);
+  } else{
+    moveToFinished(data.key);
   }
 });
 
@@ -51,23 +59,72 @@ order_ref.on('child_removed', function(data) {
 });
 
 function addCustomOrder(){
-  addOrder("Alex", Math.floor(Math.random() * 35), [{
-    name: document.getElementById("new-order-1").value
-  }, {
-    name: document.getElementById("new-order-2").value
-  }, {
-    name: document.getElementById("new-order-3").value
-  }, {
-    name: document.getElementById("new-order-4").value
-  }, {
-    name: document.getElementById("new-order-5").value
-  }, ]);
+  var val1 = document.getElementById("new-order-1").value;
+  var val2 = document.getElementById("new-order-2").value;
+  var val3 = document.getElementById("new-order-3").value;
+  var val4 = document.getElementById("new-order-4").value;
+  var val5 = document.getElementById("new-order-5").value;
 
-  document.getElementById("new-order-1").value = "";
-  document.getElementById("new-order-2").value = "";
-  document.getElementById("new-order-3").value = "";
-  document.getElementById("new-order-4").value = "";
-  document.getElementById("new-order-5").value = "";
+  var values = Array(val1, val2, val3, val4, val5);
+  var counter = 0;
+  for(var i = 0; i < values.length; ++i){
+    if(values[i]) ++counter;
+  }
+
+  switch(counter){
+    case 1:
+      addOrder("Alex", Math.floor(Math.random() * 35), [{
+        name: document.getElementById("new-order-1").value
+      },]);
+    break;
+
+    case 2:
+      addOrder("Alex", Math.floor(Math.random() * 35), [{
+        name: document.getElementById("new-order-1").value
+      }, {
+        name: document.getElementById("new-order-2").value
+      },]);
+    break;
+
+    case 3:
+      addOrder("Alex", Math.floor(Math.random() * 35), [{
+        name: document.getElementById("new-order-1").value
+      }, {
+        name: document.getElementById("new-order-2").value
+      }, {
+        name: document.getElementById("new-order-3").value
+      },]);
+    break;
+
+    case 4:
+      addOrder("Alex", Math.floor(Math.random() * 35), [{
+        name: document.getElementById("new-order-1").value
+      }, {
+        name: document.getElementById("new-order-2").value
+      }, {
+        name: document.getElementById("new-order-3").value
+      }, {
+        name: document.getElementById("new-order-4").value
+      },]);
+    break;
+
+    case 5:
+      addOrder("Alex", Math.floor(Math.random() * 35), [{
+        name: document.getElementById("new-order-1").value
+      }, {
+        name: document.getElementById("new-order-2").value
+      }, {
+        name: document.getElementById("new-order-3").value
+      }, {
+        name: document.getElementById("new-order-4").value
+      }, {
+        name: document.getElementById("new-order-5").value
+      },]);
+    break;
+
+    default:
+      console.log("Nothing to add!");
+  }
 }
 
 function addOrder(waiter, table, items) {
