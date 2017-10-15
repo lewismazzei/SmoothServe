@@ -58,6 +58,15 @@ order_ref.on('child_removed', function(data) {
   
 });
 
+function initValues(){
+  document.getElementById("new-order-1").value = "";
+  document.getElementById("new-order-2").value = "";
+  document.getElementById("new-order-3").value = "";
+  document.getElementById("new-order-4").value = "";
+  document.getElementById("new-order-5").value = "";
+
+}
+
 function addCustomOrder(){
   var val1 = document.getElementById("new-order-1").value;
   var val2 = document.getElementById("new-order-2").value;
@@ -84,6 +93,7 @@ function addCustomOrder(){
       }, {
         name: document.getElementById("new-order-2").value
       },]);
+      
     break;
 
     case 3:
@@ -94,6 +104,7 @@ function addCustomOrder(){
       }, {
         name: document.getElementById("new-order-3").value
       },]);
+      resetValues(val1, val2, val3, val4, val5);
     break;
 
     case 4:
@@ -106,6 +117,7 @@ function addCustomOrder(){
       }, {
         name: document.getElementById("new-order-4").value
       },]);
+      resetValues(val1, val2, val3, val4, val5);
     break;
 
     case 5:
@@ -120,11 +132,13 @@ function addCustomOrder(){
       }, {
         name: document.getElementById("new-order-5").value
       },]);
+      resetValues(val1, val2, val3, val4, val5);
     break;
 
     default:
       console.log("Nothing to add!");
   }
+  initValues();
 }
 
 function addOrder(waiter, table, items) {
