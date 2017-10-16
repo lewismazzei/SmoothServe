@@ -202,15 +202,19 @@ function updateCardTimer(startTime, orderId, state) {
     cardClasses.remove("teal","green","olive","yellow","orange","red")
     switch(m){
       case 0:
+      case 1:
         cardClasses.add("teal");
         break;
       case 2:
+      case 3:
         cardClasses.add("green");
         break;
       case 4:
+      case 5:
         cardClasses.add("olive");
         break;
       case 6:
+      case 7:
         cardClasses.add("yellow");
         break;
       case 8:
@@ -225,7 +229,7 @@ function updateCardTimer(startTime, orderId, state) {
 function updateStatusToServed(orderId) {
   var card_order = document.getElementById(orderId);
   document.getElementById("ordersDiv").removeChild(card_order);  
-  
+
   order_ref.child(orderId).update({
     state: 1
   }).then(function(){
