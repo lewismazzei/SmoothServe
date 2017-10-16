@@ -204,16 +204,16 @@ function updateCardTimer(startTime, orderId, state) {
       case 0:
         cardClasses.add("teal");
         break;
-      case 1:
+      case 2:
         cardClasses.add("green");
         break;
-      case 2:
+      case 4:
         cardClasses.add("olive");
         break;
-      case 3:
+      case 6:
         cardClasses.add("yellow");
         break;
-      case 4:
+      case 8:
         cardClasses.add("orange");
         break;
       default:
@@ -224,8 +224,7 @@ function updateCardTimer(startTime, orderId, state) {
 
 function updateStatusToServed(orderId) {
   var card_order = document.getElementById(orderId);
-  document.getElementById("ordersDiv").removeChild(card_order);
-
+  document.getElementById("ordersDiv").removeChild(card_order);  
   
   order_ref.child(orderId).update({
     state: 1
@@ -234,6 +233,7 @@ function updateStatusToServed(orderId) {
       moveToEating(orderId, snapshot.val());
     });
   });
+
 }
 
 function moveToEating(orderId, table) {
@@ -264,10 +264,19 @@ function updateStatusToPaying(orderId) {
 }
 
 function updateStatusToFinished(orderId) {  
-  order_ref.child(orderId).update({
-    state: 3
-  }).then(function(){
-    moveToFinished(orderId);
+  //Confirm leaving prompt
+  $('.ui.basic.modal')
+  .modal('show');
+
+  var leaving = document.getElementById("confirmLeaving");
+  var staying = document.getElementById("denyLeaving");
+
+  leaving.addEventListener('click', function(){
+    order_ref.child(orderId).update({
+      state: 3
+    }).then(function(){
+      moveToFinished(orderId);
+    });
   });
 }
 
